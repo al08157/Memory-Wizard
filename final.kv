@@ -1,0 +1,169 @@
+#:include buildingmapview.kv
+Manager:
+    HomeScreen:
+    SignUp:
+    TaskScreen:
+    TaskList:
+    MapTask:
+    
+
+
+
+        
+
+
+<HomeScreen>:
+    name :'Home'
+    FloatLayout:
+
+        Label:
+            text : 'MEMORY WIZARD'
+            size_hint: (None,None)
+            font_size: 50
+            color: (0, 0, 0, 1)
+            size: (200,100)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.93} 
+
+
+        Image:
+            source: r'C:\Users\Ahsan\OneDrive\Desktop\project\PROJECT\image.png'
+            size_hint: (None, None)
+            size: (300, 300)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7} 
+
+
+        GridLayout:
+            pos_hint: {'center_y': 0.05}
+            cols : 1
+            row_force_default : True
+            row_default_height : 50
+            padding : 80
+            spacing : 40
+
+            TextInput:
+                id: username
+                hint_text : 'Enter your name: '
+            TextInput:
+                id : password
+                hint_text : 'Enter your password: '
+                password : True
+
+            BoxLayout:
+                orientation: 'horizontal'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                Button:
+                    text: 'Sign-in'
+                    size_hint: (0.5,1)
+                    on_press: 
+                        app.root.get_screen('Home').submitbtn()
+
+                Button:
+                    text: 'Sign-up'
+                    size_hint: (0.5,1)
+                    on_press:
+                        root.manager.current = 'Enter'
+                        app.root.transition.direction ='left'
+            
+            Button:
+                text: 'Exit'
+                size_hint: (0.4, 0.1)
+                pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+                on_press: 
+                    app.stop()
+
+
+<SignUp>:
+    name : 'Enter'
+    BoxLayout:
+        orientation : 'vertical'
+        padding : 100
+        spacing : 40
+
+        TextInput:
+            id : checkname
+            hint_text : 'Enter your name: '
+
+        TextInput:
+            id : checkpassword
+            hint_text : 'Enter your password: '
+
+        TextInput:
+            id: confcheckname
+            hint_text : 'Confirm your name: '
+
+        TextInput:
+            id : confcheckpassword
+            hint_text : 'Confirm your password: '
+        
+        Button:
+            text : 'Sign-Up'
+            on_press: 
+                app.root.get_screen('Enter').sign_up()
+                app.root.transition.direction ='left'
+
+
+
+<TaskScreen>:
+
+    name: 'First'
+    FloatLayout:
+        
+        BuildingMapView:
+            
+        TextInput:
+            id: search_field
+            pos_hint: {'center_x': 0.5, 'top': 0.98}
+            size_hint: 0.8, None
+            height: 40
+            hint_text: 'Search location'
+            on_text: root.search_location(self, self.text)
+        
+        TextInput:
+            id: tasks
+            hint_text: 'Add your tasks here ....'
+            size_hint: 0.8, None
+            height : 40
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+
+        Button:
+            text: 'Add Task'
+            size_hint: 0.4, 0.05
+            pos_hint: {'center_x': 0.3, 'center_y': 0.2}
+            on_press: app.root.get_screen('First').add_task()
+
+        Button:
+            text: 'View Tasks'
+            size_hint: 0.4, 0.05
+            pos_hint: {'center_x': 0.7, 'center_y': 0.2}
+            on_press:
+                root.manager.current = 'List'
+                app.root.transition.direction ='left'
+        
+        Button:
+            text: 'Back'
+            size_hint: 0.8, 0.05
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+            on_press: 
+                root.manager.current = 'Home'
+                app.root.transition.direction ='right'
+        
+<TaskList>:
+    name: 'List'
+    
+        
+
+<MapTask>:  
+    name: 'Map' 
+    FloatLayout:
+        
+
+        # Back button
+        Button:
+            text: "Back to Tasks"
+            size_hint: None, None
+            size: 150, 50
+            pos_hint: {'x': 0.05, 'y': 0.05}
+            on_press: 
+                root.manager.current = 'First'
+                app.root.transition.direction ='right'
+

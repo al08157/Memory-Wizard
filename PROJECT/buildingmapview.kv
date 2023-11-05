@@ -1,0 +1,15 @@
+#:import MapView kivy.garden.mapview.MapView
+
+<BuildingMapView>:
+    zoom: 18
+    on_zoom:
+        self.zoom = 16 if self.zoom < 16 else self.zoom
+    lat: 24.905956
+    lon: 67.138312
+    on_lat:
+        self.start_getting_markets_in_fov()
+    on_lon:
+        self.start_getting_markets_in_fov()
+
+    size_hint: 0.8, 0.6
+    pos_hint: {'center_x':0.5,'center_y':0.65}

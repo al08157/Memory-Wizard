@@ -1,0 +1,65 @@
+<HomeScreen>:
+    name: 'home'
+
+    GridLayout:
+        rows: 2
+        padding: 50
+        spacing: 20
+
+        Button:
+            text: 'Add Task'
+            on_release: app.root.current = 'add_task'
+
+        Button:
+            text: 'View Tasks'
+            on_release: app.root.current = 'task_list'
+
+<AddTaskScreen>:
+    name: 'add_task'
+
+    GridLayout:
+        cols: 2
+        padding: 50
+        spacing: 20
+
+        Label:
+            text: 'Name: '
+
+        TextInput:
+            id: name_input
+
+        Label:
+            text: 'Description: '
+
+        TextInput:
+            id: description_input
+
+        Button:
+            text: 'Add'
+            on_release: root.add_task()
+
+        Button:
+            text: 'Cancel'
+            on_release:
+                root.name_input.text = ''
+                root.description_input.text = ''
+                app.root.current = 'home'
+
+<TaskListScreen>:
+    name: 'task_list'
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+
+        ScrollView:
+            GridLayout:
+                id: task_list_view
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: 'Back to Home'
+            on_release: app.root.current = 'home'

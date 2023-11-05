@@ -1,0 +1,81 @@
+Manager:
+    Task:
+    Tasks:
+    TaskItem:
+    MainScreen:
+
+<MainScreen>:
+    name: 'main'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Welcome to your to-do list!'
+            font_size: '24sp'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        Button:
+            text: 'View tasks'
+            size_hint_y: None
+            height: '48dp'
+            on_release:
+                app.root.current = 'tasks'
+
+        Button:
+            text: 'Add task'
+            size_hint_y: None
+            height: '48dp'
+            on_re:
+                app.root.current = 'add_task'
+
+<Tasks>:
+    name: 'tasks'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Your tasks:'
+            font_size: '24sp'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        ScrollView:
+            GridLayout:
+                id: task_list
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: 'Back to menu'
+            size_hint_y: None
+            height: '48dp'
+            on_press:
+                app.root.current = 'main'
+
+<AddTask>:
+    name: 'add_task'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Add a new task:'
+            font_size: '24sp'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        TextInput:
+            id: task_input
+            multiline: False
+
+        Button:
+            text: 'Add task'
+            size_hint_y: None
+            height: '48dp'
+            on_press:
+                root.add_task()
+                app.root.current = 'tasks'
