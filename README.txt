@@ -6,4 +6,4 @@ DOWNLOAD KIVY MODULE IN YOUR TERMINAL TO RUN THE APP
 
 3.-------- garden install mapview ----------------
 
-4.------------- RUN final.py ---------------------
+4.------------- RUN ONLY-> final.py ---------------------
